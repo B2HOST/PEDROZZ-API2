@@ -55,7 +55,7 @@
 
 
   // FIM DO BOT
-
+   var criador = ['pedrozz'];
   // Configurando o middleware de sessão
   app.use(session({
     secret: 'pedrozz',
@@ -1002,10 +1002,12 @@
   const resultadoDiminuicao = diminuirSaldo(username);
   const add = adicionarSaldo(username)
     if (resultadoDiminuicao && add) { 
-      ytPlayMp4(query)
-        .then((result) => {
-          res.json(result);
-        })
+       ytPlayMp3(query).then((akk) => {
+res.json({
+status: true,
+código: 200,
+criador: `${criador}`,
+resultado: akk
         .catch((error) => {
           res.json(error);
         });
@@ -1022,15 +1024,15 @@
       if (!user) {
         return res.status(401).send('Acesso não autorizado.');
       }
-
   const resultadoDiminuicao = diminuirSaldo(username);
   const add = adicionarSaldo(username)
     if (resultadoDiminuicao && add) {
-
-      ytPlayMp3(query)
-        .then((result) => {
-          res.json(result);
-        })
+ ytPlayMp3(query).then((akk) => {
+res.json({
+status: true,
+código: 200,
+criador: `${criador}`,
+resultado: akk
         .catch((error) => {
           res.json(error);
         });
