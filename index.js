@@ -75,8 +75,8 @@
   app.set('view engine', 'ejs');
   app.set('views', path.join(__dirname, 'views'));
 
-  const adminKey = 'pedrozz';
 
+var criadr = ['pedrozz']
   // Definindo o schema do usuário
   const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
@@ -1001,20 +1001,22 @@
 
   const resultadoDiminuicao = diminuirSaldo(username);
   const add = adicionarSaldo(username)
-    if (resultadoDiminuicao && add)
-       ytPlayMp3(query).then((akk) => {
-res.json({
-status: true,
-código: 200,
-criador: `${criador}`,
-resultado: akk
-}).catch((error) => {
+    if (resultadoDiminuicao && add) { 
+      ytPlayMp4(query)
+        .then((result) => {
+        status: true,
+        código: 200,
+        criador: `${criador}`,
+        res.json(result);
+        })
+        .catch((error) => {
           res.json(error);
         });
-    }) else {
+    } else {
       console.log('Saldo insuficiente.');
     }
-  });
+  });  
+  
 
   app.get("/api/playmp3", async (req, res, next) => {
       const { username, key, query } = req.query;
@@ -1024,19 +1026,22 @@ resultado: akk
       if (!user) {
         return res.status(401).send('Acesso não autorizado.');
       }
+
   const resultadoDiminuicao = diminuirSaldo(username);
   const add = adicionarSaldo(username)
-    if (resultadoDiminuicao && add)
- ytPlayMp3(query).then((akk) => {
-res.json({
-status: true,
-código: 200,
-criador: `${criador}`,
-resultado: akk
-  }).catch((error) => {
+    if (resultadoDiminuicao && add) {
+
+      ytPlayMp3(query)
+        .then((result) => {
+          status: true,
+        código: 200,
+        criador: `${criador}`,
+          res.json(result);
+        })
+        .catch((error) => {
           res.json(error);
         });
-    }) else {
+    } else {
       console.log('Saldo insuficiente.');
     }
   });
