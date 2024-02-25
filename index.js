@@ -339,7 +339,7 @@
     }
 
     // Cria um novo usuário com a chave e o saldo padrão
-    const ft = "https://telegra.ph/file/f6a78bb68df8f3dcfe8a5.jpg"; // URL padrão da foto
+    const ft = "https://telegra.ph/file/38c6d30cc208a8cc9d228.jpg"; // URL padrão da foto
     const saldo = 100; // Saldo padrão
     const total = 0;
     const newUser = new User({ username, password, key, saldo, total, ft });
@@ -421,7 +421,7 @@
         return res.status(401).send('Nome de usuário ou senha incorretos. Por favor, tente novamente.');
       }
 
-      res.redirect(`/anikit?username=${user.username}&key=${user.key}`);
+      res.redirect(`/api?username=${user.username}&key=${user.key}`);
     } catch (error) {
       console.error('Erro ao acessar o banco de dados:', error);
       return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
@@ -507,7 +507,7 @@
       // Salva as alterações no banco de dados
       await user.save();
 
-      res.redirect(`/anikit?username=${user.username}&key=${user.key}`);
+      res.redirect(`/api?username=${user.username}&key=${user.key}`);
     } catch (error) {
       console.error('Erro ao acessar o banco de dados:', error);
       return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
@@ -516,7 +516,7 @@
 
   // Restante do código do Express e configurações...
 
-  app.get('/anikit', async (req, res) => {
+  app.get('/api', async (req, res) => {
     const { username, key } = req.query;
 
     try {
@@ -956,7 +956,7 @@
 
   // ACABO;
 
-  app.get('/anikit/tiktok', async(req, res) => {
+  app.get('/api/tiktok', async(req, res) => {
   var videoUrl = req.query.videoUrl
   if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
   //const getVideoDownloadLink = require("./data/youtube.js")
@@ -1034,7 +1034,7 @@
 
 
 
-app.get('/anikit/ytmp4', async(req, res) => {
+app.get('/api/ytmp4', async(req, res) => {
 var videoUrl = req.query.videoUrl
 if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
 //const getVideoDownloadLink = require("./data/youtube.js")
@@ -1066,7 +1066,7 @@ getVideoDownloadLink(videoUrl)
 
 })
 
-app.get('/anikit/ytmp3', async(req, res) => {
+app.get('/api/ytmp3', async(req, res) => {
 var videoUrl = req.query.videoUrl
 if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
 //const getAudioDownloadLink = require("./data/youtube.js")
