@@ -19,7 +19,6 @@
   fetchGogoAnimeInfo,
   fetchGogoanimeEpisodeSource,
   episod,
-  
   tiktokdownload,
   
   getVideoDownloadLink,
@@ -55,7 +54,7 @@
 
 
   // FIM DO BOT
-   var criador = ['pedrozz'];
+
   // Configurando o middleware de sessão
   app.use(session({
     secret: 'pedrozz',
@@ -75,8 +74,8 @@
   app.set('view engine', 'ejs');
   app.set('views', path.join(__dirname, 'views'));
 
+  const adminKey = 'pedrozz';
 
-var criadr = ['pedrozz']
   // Definindo o schema do usuário
   const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
@@ -989,7 +988,6 @@ var criadr = ['pedrozz']
 
 
   app.get("/api/playmp4", async (req, res, next) => {
-app.get("/api/playmp4", async (req, res, next) => {
   var query = req.query.query
   if(!query) return res.json({"error": "faltouo parâmetro query"})
       const { username, key } = req.query;
@@ -1039,7 +1037,6 @@ app.get("/api/playmp4", async (req, res, next) => {
       console.log('Saldo insuficiente.');
     }
   });
-
 
 
 
