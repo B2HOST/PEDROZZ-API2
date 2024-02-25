@@ -1008,7 +1008,7 @@ status: true,
 código: 200,
 criador: `${criador}`,
 resultado: akk
-        .catch((error) => {
+}).catch((error) => {
           res.json(error);
         });
     } else {
@@ -1033,7 +1033,7 @@ status: true,
 código: 200,
 criador: `${criador}`,
 resultado: akk
-        .catch((error) => {
+  }).catch((error) => {
           res.json(error);
         });
     } else {
