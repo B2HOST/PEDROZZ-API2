@@ -989,6 +989,7 @@ var criadr = ['pedrozz']
 
 
   app.get("/api/playmp4", async (req, res, next) => {
+app.get("/api/playmp4", async (req, res, next) => {
   var query = req.query.query
   if(!query) return res.json({"error": "faltouo parâmetro query"})
       const { username, key } = req.query;
@@ -1004,10 +1005,7 @@ var criadr = ['pedrozz']
     if (resultadoDiminuicao && add) { 
       ytPlayMp4(query)
         .then((result) => {
-        status: true,
-        código: 200,
-        criador: `${criador}`,
-        res.json(result);
+          res.json(result);
         })
         .catch((error) => {
           res.json(error);
@@ -1015,8 +1013,7 @@ var criadr = ['pedrozz']
     } else {
       console.log('Saldo insuficiente.');
     }
-  });  
-  
+  });
 
   app.get("/api/playmp3", async (req, res, next) => {
       const { username, key, query } = req.query;
@@ -1033,9 +1030,6 @@ var criadr = ['pedrozz']
 
       ytPlayMp3(query)
         .then((result) => {
-          status: true,
-        código: 200,
-        criador: `${criador}`,
           res.json(result);
         })
         .catch((error) => {
@@ -1045,6 +1039,7 @@ var criadr = ['pedrozz']
       console.log('Saldo insuficiente.');
     }
   });
+
 
 
 
