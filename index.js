@@ -19,13 +19,16 @@
   fetchGogoAnimeInfo,
   fetchGogoanimeEpisodeSource,
   episod,
-  ytPlayMp4, 
   tiktokdownload,
-  ytPlayMp3,
-  getVideoDownloadLink,
-  getAudioDownloadLink,
   scrapeWebsite
   } = require("./lib/scraper.js");
+  const {
+  ytDonlodMp3,
+  ytDonlodMp4,
+  ytPlayMp3,
+  ytPlayMp4,
+  ytSearch
+} = require("./lib/youtube");
   let clientInstance;
   // INÍCIO DO BOT 
 
@@ -48,7 +51,8 @@
 
 
   // FIM DO BOT
-
+var criador = ['pedrozz'];
+var key = 'pedrozz13'
   // Configurando o middleware de sessão
   app.use(session({
     secret: 'pedrozz',
@@ -979,36 +983,54 @@
       console.log('Saldo insuficiente.');
     }
   })
-
-
-  app.get("/api/playmp4", async (req, res, next) => {
-  var query = req.query.query
-  if(!query) return res.json({"error": "faltouo parâmetro query"})
-      const { username, key } = req.query;
-    const users = Person
-    // Verifica se o usuário existe e a chave está correta
-    const user = await User.findOne({ username, key });
-      if (!user) {
-        return res.status(401).send('Acesso não autorizado.');
-      }
-
-  const resultadoDiminuicao = diminuirSaldo(username);
-  const add = adicionarSaldo(username)
-    if (resultadoDiminuicao && add) { 
-      ytPlayMp4(query)
-        .then((result) => {
-          res.json(result);
-        })
-        .catch((error) => {
-          res.json(error);
-        });
-    } else {
-      console.log('Saldo insuficiente.');
+app.get('/api/ytmp3', async(req, res, next) => {
+ const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
     }
-  });
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+ if (!link) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o link"})
+ ytDonlodMp3(link).then((akk) => {
+res.json({
+status: true,
+código: 200,
+criador: `${criador}`,
+resultado: akk
+})}).catch(e => {
+res.sendFile("sem saldo")})})
 
-  app.get("/api/playmp3", async (req, res, next) => {
-      const { username, key, query } = req.query;
+ app.get('/api/ytmp4', async(req, res, next) => {
+ const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+ if (!link) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o link"})
+ ytDonlodMp4(link).then((akk) => {
+res.json({
+status: true,
+código: 200,
+criador: `${criador}`,
+resultado: akk
+})
+}).catch(e => {
+res.sendFile("sem saldo")}
+)
+})
+
+
+app.get('/api/playmp3', async(req, res, next) => {
+ const { username, key, query } = req.query;
     const users = Person
     // Verifica se o usuário existe e a chave está correta
     const user = await User.findOne({ username, key });
@@ -1019,85 +1041,39 @@
   const resultadoDiminuicao = diminuirSaldo(username);
   const add = adicionarSaldo(username)
     if (resultadoDiminuicao && add) {
+ if (!nome) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o nome"})
+ ytPlayMp3(nome).then((akk) => {
+res.json({
+status: true,
+código: 200,
+criador: `${criador}`,
+resultado: akk
+})}).catch(e => {
+res.sendFile("sem saldo")})})
 
-      ytPlayMp3(query)
-        .then((result) => {
-          res.json(result);
-        })
-        .catch((error) => {
-          res.json(error);
-        });
-    } else {
-      console.log('Saldo insuficiente.');
-    }
-  });
+ app.get('/api/playmp4', async(req, res, next) => {
+ const { username, key, query } = req.query;
+    const users = Person
+    // Verifica se o usuário existe e a chave está correta
+    const user = await User.findOne({ username, key });
+      if (!user) {
+        return res.status(401).send('Acesso não autorizado.');
+      }
 
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
+    if (resultadoDiminuicao && add) {
+ if (!nome) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o nome"})
+ ytPlayMp4(nome).then((akk) => {
+res.json({
+status: true,
+código: 200,
+criador: `${criador}`,
+resultado: akk
+})}).catch(e => {
+res.sendFile("sem saldo")})})
 
-
-app.get('/api/ytmp4', async(req, res) => {
-var videoUrl = req.query.videoUrl
-if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
-//const getVideoDownloadLink = require("./data/youtube.js")
-// Exemplo de uso
-  const { username, key } = req.query;
-  const users = Person
-  // Verifica se o usuário existe e a chave está correta
-  const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
-
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
-  if (resultadoDiminuicao && add) {
-getVideoDownloadLink(videoUrl)
-  .then((downloadLink) => {
-    if (downloadLink) {
-      res.json({
-      url: `${downloadLink}`
-    })
-    } else {
-      console.log('Falha ao obter o link de download do vídeo.');
-    }
-  });
-  } else {
-    console.log('Saldo insuficiente.');
-  }
-
-})
-
-app.get('/api/ytmp3', async(req, res) => {
-var videoUrl = req.query.videoUrl
-if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
-//const getAudioDownloadLink = require("./data/youtube.js")
-  const { username, key } = req.query;
-  const users = Person
-  // Verifica se o usuário existe e a chave está correta
-  const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
-
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
-  if (resultadoDiminuicao && add) {
-getAudioDownloadLink(videoUrl)
-  .then((downloadLink) => {
-    if (downloadLink) {
-    res.json({
-      url: `${downloadLink}`
-    })
-     // console.log('Link de download do áudio:', downloadLink);
-    } else {
-      console.log('Falha ao obter o link de download do áudio.');
-    }
-  });
-  } else {
-    console.log('Saldo insuficiente.');
-  }
-
-});
-
+  
   app.get('/nsfw/ahegao', async (req, res, next) => {
     const { username, key } = req.query;
     const users = Person
