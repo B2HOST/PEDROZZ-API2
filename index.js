@@ -1034,64 +1034,69 @@
 
 
 
-  app.get('/anikit/ytmp4', async(req, res) => {
-  var videoUrl = req.query.videoUrl
-  if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
-  //const getVideoDownloadLink = require("./data/youtube.js")
-  // Exemplo de uso
-    const { username, key } = req.query;
-    const users = Person
-    // Verifica se o usuário existe e a chave está correta
-    const user = await User.findOne({ username, key });
-      if (!user) {
-        return res.status(401).send('Acesso não autorizado.');
-      }
-
-  const resultadoDiminuicao = diminuirSaldo(username);
-  const add = adicionarSaldo(username)
-    if (resultadoDiminuicao && add) {
-  getVideoDownloadLink(videoUrl)
-    .then((downloadLink) => {
-      if (downloadLink) {
-        res.json({
-        url: `${downloadLink}`
-      })
-      } else {
-        console.log('Falha ao obter o link de download do vídeo.');
-      }
-    });
-    } else {ani => {
-  var videoUrl = req.query.videoUrl
-  if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
-  //const getAudioDownloadLink = require("./data/youtube.js")
-    const { username, key } = req.query;
-    const users = Person
-    // Verifica se o usuário existe e a chave está correta
-    const user = await User.findOne({ username, key });
-      if (!user) {
-        return res.status(401).send('Acesso não autorizado.');
-      }
-
-  const resultadoDiminuicao = diminuirSaldo(username);
-  const add = adicionarSaldo(username)
-    if (resultadoDiminuicao && add) {
-  getAudioDownloadLink(videoUrl)
-    .then((downloadLink) => {
-      if (downloadLink) {
-      res.json({
-        url: `${downloadLink}`
-      })
-       // console.log('Link de download do áudio:', downloadLink);
-      } else {
-        console.log('Falha ao obter o link de download do áudio.');
-      }
-    });
-    } else {
-      console.log('Saldo insuficiente.');
+app.get('/anikit/ytmp4', async(req, res) => {
+var videoUrl = req.query.videoUrl
+if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
+//const getVideoDownloadLink = require("./data/youtube.js")
+// Exemplo de uso
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
     }
 
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+getVideoDownloadLink(videoUrl)
+  .then((downloadLink) => {
+    if (downloadLink) {
+      res.json({
+      url: `${downloadLink}`
+    })
+    } else {
+      console.log('Falha ao obter o link de download do vídeo.');
+    }
   });
+  } else {
+    console.log('Saldo insuficiente.');
+  }
 
+})
+
+app.get('/anikit/ytmp3', async(req, res) => {
+var videoUrl = req.query.videoUrl
+if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
+//const getAudioDownloadLink = require("./data/youtube.js")
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+getAudioDownloadLink(videoUrl)
+  .then((downloadLink) => {
+    if (downloadLink) {
+    res.json({
+      url: `${downloadLink}`
+    })
+     // console.log('Link de download do áudio:', downloadLink);
+    } else {
+      console.log('Falha ao obter o link de download do áudio.');
+    }
+  });
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+
+});
 
   app.get('/nsfw/ahegao', async (req, res, next) => {
     const { username, key } = req.query;
