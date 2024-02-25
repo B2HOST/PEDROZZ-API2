@@ -52,7 +52,6 @@
 
   // FIM DO BOT
 var criador = ['pedrozz'];
-var key = 'pedrozz13'
   // Configurando o middleware de sessão
   app.use(session({
     secret: 'pedrozz',
@@ -983,7 +982,9 @@ var key = 'pedrozz13'
       console.log('Saldo insuficiente.');
     }
   })
-app.get('/api/ytmp3', async(req, res, next) => {
+
+
+   router.get('/api/playmp3', async(req, res, next) => {
  const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -991,56 +992,10 @@ app.get('/api/ytmp3', async(req, res, next) => {
     if (!user) {
       return res.status(401).send('Acesso não autorizado.');
     }
+
 const resultadoDiminuicao = diminuirSaldo(username);
 const add = adicionarSaldo(username)
-  if (resultadoDiminuicao && add) {
- if (!link) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o link"})
- ytDonlodMp3(link).then((akk) => {
-res.json({
-status: true,
-código: 200,
-criador: `${criador}`,
-resultado: akk
-})}).catch(e => {
-res.sendFile("sem saldo")})})
-
- app.get('/api/ytmp4', async(req, res, next) => {
- const { username, key } = req.query;
-  const users = Person
-  // Verifica se o usuário existe e a chave está correta
-  const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
-  if (resultadoDiminuicao && add) {
- if (!link) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o link"})
- ytDonlodMp4(link).then((akk) => {
-res.json({
-status: true,
-código: 200,
-criador: `${criador}`,
-resultado: akk
-})
-}).catch(e => {
-res.sendFile("sem saldo")}
-)
-})
-
-
-app.get('/api/playmp3', async(req, res, next) => {
- const { username, key, query } = req.query;
-    const users = Person
-    // Verifica se o usuário existe e a chave está correta
-    const user = await User.findOne({ username, key });
-      if (!user) {
-        return res.status(401).send('Acesso não autorizado.');
-      }
-
-  const resultadoDiminuicao = diminuirSaldo(username);
-  const add = adicionarSaldo(username)
-    if (resultadoDiminuicao && add) {
+  if (resultadoDiminuicao && add)
  if (!nome) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o nome"})
  ytPlayMp3(nome).then((akk) => {
 res.json({
@@ -1049,20 +1004,20 @@ código: 200,
 criador: `${criador}`,
 resultado: akk
 })}).catch(e => {
-res.sendFile("sem saldo")})})
+res.sendFile(error)})})
 
- app.get('/api/playmp4', async(req, res, next) => {
- const { username, key, query } = req.query;
-    const users = Person
-    // Verifica se o usuário existe e a chave está correta
-    const user = await User.findOne({ username, key });
-      if (!user) {
-        return res.status(401).send('Acesso não autorizado.');
-      }
+ router.get('/api/playmp4', async(req, res, next) => {
+ const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
 
-  const resultadoDiminuicao = diminuirSaldo(username);
-  const add = adicionarSaldo(username)
-    if (resultadoDiminuicao && add) {
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add)
  if (!nome) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o nome"})
  ytPlayMp4(nome).then((akk) => {
 res.json({
@@ -1071,9 +1026,57 @@ código: 200,
 criador: `${criador}`,
 resultado: akk
 })}).catch(e => {
-res.sendFile("sem saldo")})})
+res.sendFile(error)})})
 
-  
+app.get('/api/ytmp3', async(req, res, next) => {
+ const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add)
+ if (!link) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o link"})
+ ytDonlodMp3(link).then((akk) => {
+res.json({
+status: true,
+código: 200,
+criador: `${criador}`,
+resultado: akk
+})
+}).catch(e => {
+res.sendFile(error)}
+)}
+)
+
+app.get('/api/ytmp4', async(req, res, next) => {
+ const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add)
+ if (!link) return res.json({ status : false, criador : `criador`, mensagem : "Coloque o link"})
+ ytDonlodMp4(link).then((akk) => {
+res.json({
+status: true,
+código: 200,
+criador: `${criador}`,
+resultado: akk
+})}).catch(e => {
+res.sendFile(error)})})
+
+
+
   app.get('/nsfw/ahegao', async (req, res, next) => {
     const { username, key } = req.query;
     const users = Person
