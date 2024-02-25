@@ -1001,8 +1001,8 @@
 
   const resultadoDiminuicao = diminuirSaldo(username);
   const add = adicionarSaldo(username)
-    if (resultadoDiminuicao && add) { 
-       ytPlayMp3(query).then((akk)
+    if (resultadoDiminuicao && add)
+       ytPlayMp3(query).then((akk) => {
 res.json({
 status: true,
 código: 200,
@@ -1026,8 +1026,8 @@ resultado: akk
       }
   const resultadoDiminuicao = diminuirSaldo(username);
   const add = adicionarSaldo(username)
-    if (resultadoDiminuicao && add) {
- ytPlayMp3(query).then((akk)
+    if (resultadoDiminuicao && add)
+ ytPlayMp3(query).then((akk) => {
 res.json({
 status: true,
 código: 200,
