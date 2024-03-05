@@ -4380,16 +4380,18 @@ getAudioDownloadLink(videoUrl)
 
   const PORT = 8080;
 
-  // Conexão com o MongoDB
-
-  mongoose
-    .connect('mongodb+srv://pedro13755:<password>@cluster0.wlbjwkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-    .then(() => {
-      console.log('Conectou ao banco!');
-      app.listen(PORT);
-    })
-    .catch((err) => console.log(err));
+// Conectando ao banco de dados MongoDB
+mongoose.connect('mongodb+srv://pedro13755:pedro13755@cluster0.wlbjwkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Conectou ao banco de dados!');
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+  });
+})
+.catch((err) => {
+  console.error('Erro ao conectar ao banco de dados:', err);
+});
 
