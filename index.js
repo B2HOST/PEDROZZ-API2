@@ -4383,7 +4383,7 @@ getAudioDownloadLink(videoUrl)
   // Conexão com o MongoDB
 
   mongoose
-    .connect('mongodb+srv://anikit:EPt96b3yMx3wmEC@cluster0.ukzkyjq.mongodb.net/?retryWrites=true&w=majority', {
+    .connect('mongodb+srv://pedro13755:<password>@cluster0.wlbjwkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
