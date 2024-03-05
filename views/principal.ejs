@@ -1062,6 +1062,64 @@ Um 'bot' – abreviatura de robô – é um programa de software que executa tar
 </div>
   
 
+<style>
+       
+        h1 {
+         
+          text-align: center;
+          margin-top: 20px;
+          color: red;
+        }
+        .container1 {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: skyblue;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .user-info1 {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+        }
+        .user-photo1 {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+        .user-name1 {
+          font-size: 16px;
+          color: black;
+        }
+        hr1 {
+          border: none;
+          border-top: 1px solid #ccc;
+        }
+      </style>
+    </head>
+    <body>
+
+    <h1>Usuários Mais Ativos na API</h1>
+
+    <div class="container1">
+      <div class="tutotxt1">
+        <div class="tutotxtt1">
+          <center>
+            <% topUsers.sort((a, b) => b.total - a.total).forEach(function(user) { %><br>
+            <div class="user-info1">
+              <img class="user-photo1" src="<%= user.ft %>" alt="Foto do Usuário">
+              <div class="user-name1">@<%= user.username %>: <%= user.saldo %></div>
+            </div>
+            <hr><br>
+            <% }); %>
+          </center>
+        </div>
+      </div>
+    </div>
+
+
    <footer class="footer">
 <div class="d-sm-flex justify-content-center justify-content-sm-between">
 <p><span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2024 Pedrozz Mods</span></p>
