@@ -4381,7 +4381,7 @@ getAudioDownloadLink(videoUrl)
   const PORT = 8080;
 
 // Conectando ao banco de dados MongoDB
-mongoose.connect('mongodb+srv://pedro13755:pedro13755@cluster0.wlbjwkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://pedro13755:h77UrfAohhybqngF@cluster0.wlbjwkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
