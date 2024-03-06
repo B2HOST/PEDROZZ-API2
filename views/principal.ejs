@@ -886,11 +886,12 @@ document.getElementById("btn-purpura").addEventListener("click", function(){
       <a href="#" class="btn btn-primary btn-sm-square rounded-circle text-white"><i class="fab fa-linkedin-in"></i></a>
   </div>
 </div>
-  <div class="welcome-container">
+ <div class="welcome-container">
   <div id="welcomeBox" class="welcome-box">
     <div class="close-btn" onclick="closeWelcomeBox()">X</div>
-    <img src="https://telegra.ph/file/2f9c1f632b7f7790f3423.jpg" class="welcome-image" alt="Usuário">
-    <p class="welcome-text">Bem vindo a nossa REST API <%= user.username %></p>
+    <img src="<%= user.ft %>" class="welcome-image" alt="Usuário">
+    <p class="welcome-text">Bem vindo a nossa REST API </p>
+ <p class="welcome-text">Usuario: <%= user.username %> </p>
     <br></br>
    <p class="welcome-text">Feita com ❤️ por Pedrozz</p>
   </div>
@@ -900,27 +901,7 @@ document.getElementById("btn-purpura").addEventListener("click", function(){
 <h1>Rest Api feita com ❤️ por Pedrozz</h1>
   </div>
   </selection> 
-  <div class="tutotxt">
-<div class="ip">
-<div class="card">
-<div class="card-body">
-<h5 class="font-weight-bold text-danger text-uppercase"></h5>
-<h3 style="color: red;" class="font-weight-bold">INFORMAÇÕES DO USUÁRIO</h3>
-    <div class="video-container">
-    <center>
-    </center>
-    <h4>USER: <%= user.username %></h4>
-    <h4>REQUEST: <%= user.saldo %></h4>
-    <h4>KEY: <%= user.key %></h4>
-    <br>
-    
-  </form>
-    </center>
-    </div>
-</div>
-</div>
-</div>
-</div>
+ 
   
   <br></br>
   
@@ -930,12 +911,10 @@ document.getElementById("btn-purpura").addEventListener("click", function(){
    <h3>NÚMERO DE VISITAS</h3>
 <div class="contador-visitantes" align="center">
     <a href="/">
-        <img src="https://contador.s12.com.br/img-ax3yw5zxZz84W7Z1-34.gif" border="00000" alt="contador grátis">
+        <img src="https://contador.s12.com.br/img-4ZD6Zy532dd36c8Y-38.gif" border="00000" alt="contador grátis">
     </a>
     <script type="text/javascript" src="https://contador.s12.com.br/ad.js?id=ax3yw5zxZz84W7Z1"></script>
 </div>
-<!-- Fim Contador de visitas -->      
-  <br></br>
   
         
 
