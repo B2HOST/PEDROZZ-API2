@@ -9,13 +9,15 @@
         *{
           margin: 0;
         }
-        body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #333;
-      color: white;
-      overflow: hidden; 
-        }
+        body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #310404
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
+  }
 
       .video-background {
       position: fixed;
@@ -184,11 +186,38 @@ background-color: black;
             display: flex;
             justify-content: center;
         }
-        img {
-        width: 40%;
-        border-radius: 50%;
-        box-shadow: 0px 0px 23px 5px red;
-        }
+
+
+  .welcome-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin-bottom: 25px;
+      box-shadow: 0px 0px 23px 5px red;
+  }
+
+  .container3 {
+      text-align: center;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(3, 3, 3, 0.13);
+  }
+  .battery-icon3 {
+      width: 50px;
+      height: auto;
+      vertical-align: middle;
+
+    .pedrozz3{
+    color: #000000;
+
+    }
+     section2 {
+      padding: 40px;
+      text-align: center;
+      background-color: black
+      border-radius: 10px;
+    }
 
     </style>
     
@@ -212,47 +241,47 @@ background-color: black;
     </div>
     
     <br>
+  <center>
     <h1>INFORMAÇÕES DO USUÁRIO</h1>
-    <div class="video-container">
-    <center>
-    <img src="<%= user.ft %>">
     </center>
-    
+  <center>
+    <div class="video-container">
+       <img src="<%= user.ft %>" class="welcome-image" alt="Usuário">
+      </center>
+      
+     
     <br>
-    <center>
+  <center>
     <form action="/edit/<%= user.username %>" method="post">
     <label for="password">Nova Senha:</label>
     <input type="password" id="password" placeholder="Senha atual: <%= user.password %>" name="password">
+      <br>
     <label for="ft">Nova Foto:</label>
     <input type="text" id="ft" placeholder="Exemplo: <%= user.ft %>" name="ft">
-    <center>
     <button type="submit">   Salvar   </button>
-    </center>
   </form>
-    </center>
-    </div>
+</center>
 
-  <div class="tutotxt">
-<div class="ip">
-<div class="card">
-<div class="card-body">
-<h5 class="font-weight-bold text-danger text-uppercase"></h5>
-<h3 style="color: red;" class="font-weight-bold">INFORMAÇÕES DO USUÁRIO</h3>
-    <div class="video-container">
-    <center>
-    </center>
-    <h4>USER: <%= user.username %></h4>
-    <h4>REQUEST: <%= user.saldo %></h4>
-    <h4>KEY: <%= user.key %></h4>
-    <br>
-    
-  </form>
-    </center>
-    </div>
-</div>
-</div>
-</div>
-</div>
+  
+<!---
+            <section3>
+      <div class="container3">
+      <div class="pedrozz3">
+    <h1>Informacaes do usuário</h1>
+<p>Cidade: <span id="city"></span></p>
+<p>Pais: <span id="country"></span></p> 
+<p>Regiao: <span id="region"></span></p>
+<p>Ip: <span id="ip"></span></p>
+<p>Wifi: <span id="hostname"></span></p>
+  <p>loc: <span id="loc"></span></p>
+  <p>TimeZone: <span id="timezone"></span></p>
+<p id="battery">Porcentagem da Bateria: </p>
+<p>Navegador: <span id="browserInfo"></span></p>
+<p>Aparelho: <span id="deviceInfo"></span></p>
+            </div>
+            </div>
+                </section3> 
+  ---->
   
   <br></br>
   <audio autoplay="true" src="https://c.top4top.io/m_2974euesy9.mp3">
@@ -291,5 +320,31 @@ background-color: black;
             menuToggle.classList.toggle('hide-menu');
         }
     </script>
+  <script>
+    fetch('https://ipinfo.io/?token=b1459713df73c6')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('city').innerText = data.city;
+            document.getElementById('country').innerText = data.country;
+            document.getElementById('region').innerText = data.region;
+            document.getElementById('ip').innerText = data.ip;
+            document.getElementById('hostname').innerText = data.hostname;
+            document.getElementById('timezone').innerText = data.timezone;
+            document.getElementById('loc').innerText = data.loc;
+        });
+
+  navigator.getBattery().then(function(battery) {
+  function updateBatteryStatus() {
+  document.getElementById('battery').textContent = 'Porcentagem da Bateria: ' + Math.floor(battery.level * 100) + '%';
+  }
+  battery.addEventListener('levelchange', updateBatteryStatus);
+  updateBatteryStatus();
+  });        
+
+  document.getElementById("browserInfo").innerHTML = navigator.appName;
+    var device = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "celular" : "computador";
+    document.getElementById("deviceInfo").innerHTML = device;
+
+  </script>
 </body>
 </html>
