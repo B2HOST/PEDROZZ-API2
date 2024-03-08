@@ -4386,7 +4386,7 @@ mongoose.connect('mongodb+srv://pedro13755:h77UrfAohhybqngF@cluster0.wlbjwkj.mon
   useUnifiedTopology: true,
 })
 .then(() => {
-  console.log('Conectou ao banco de dados!');
+  console.log('Conectou ao banco de dados mongoDB com sucesso');
   app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
   });
