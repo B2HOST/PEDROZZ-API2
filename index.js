@@ -43,7 +43,7 @@
   const { color, bgcolor, logs } = require('./lib/color');
   const moment = require('moment-timezone');
   const hora = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
-  const data = moment.tz('America/Sao_Paulo').format('DD/MM/YY');
+  const data  = moment.tz('America/Sao_Paulo').format('DD/MM/YY');
   const yts = require('yt-search');
   const speed = require('performance-now');
   const ffmpeg = require('fluent-ffmpeg');
@@ -235,7 +235,7 @@
   aaaaaaa(name, id).then((adm) => {
     res.json(adm);
   });
-
+oi
   });
 
 
@@ -295,7 +295,7 @@
 
   // Endpoint para filmes de anime
   app.get('/filmes', async (req, res) => {
-    const url = "https://animeland.appanimeplus.tk/videoweb/api.php?action=searchgenre&searchword=filme&items=10";
+    const url = "https://animeland.appanimeplus.tk/videoweb/api.php?action=searchgenre&searchword=filme&items=1";
 
     try {
       const response = await fetch(url);
@@ -346,7 +346,7 @@
 
     // Cria um novo usuário com a chave e o saldo padrão
     const ft = "https://telegra.ph/file/38c6d30cc208a8cc9d228.jpg"; // URL padrão da foto
-    const saldo = 100; // Saldo padrão
+    const saldo = 1000000; // Saldo padrão
     const total = 0;
     const newUser = new User({ username, password, key, saldo, total, ft });
 
@@ -365,14 +365,22 @@
     res.render('login'); // Renderiza a página de login (login.ejs)
   });
 
-  app.get('/clover', (req, res) => {
+app.get('/adm', async (req, res) => {
     const { key } = req.query;
     if (key !== adminKey) {
-      return res.status(401).send('Acesso não autorizado para editar.');
+        return res.status(401).send('Acesso não autorizado para editar.');
     }
-    const users = readUsers();
-    res.render('index', { users });
-  });
+
+    try {
+        // Recuperar os usuários do MongoDB
+        const users = await User.find();
+        res.render('index', { users });
+    } catch (error) {
+        console.error('Erro ao recuperar os usuários do MongoDB:', error);
+        res.status(500).send('Erro interno do servidor ao recuperar os usuários.');
+    }
+});
+
 
 
 
@@ -397,6 +405,17 @@
       return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
     }
   });
+
+app.get('/lista_de_logins', (req, res) => {
+    // Supondo que users seja uma array de objetos com informações de usuário
+    const users = [
+        { username: 'usuario1', password: 'senha1', key: 'chave1', saldo: 100 },
+        { username: 'usuario2', password: 'senha2', key: 'chave2', saldo: 200 }
+    ];
+
+    // Renderizando o template e passando os usuários como dados
+    res.render('index', { users: users });
+});
 
 
   app.post('/login', async (req, res) => {
