@@ -345,8 +345,8 @@ oi
     }
 
     // Cria um novo usuário com a chave e o saldo padrão
-    const ft = "https://telegra.ph/file/38c6d30cc208a8cc9d228.jpg"; // URL padrão da foto
-    const saldo = 1000000; // Saldo padrão
+    const ft = "https://telegra.ph/file/a88ded9f76aee0ff1d82a.jpg"; // URL padrão da foto
+    const saldo = 100; // Saldo padrão
     const total = 0;
     const newUser = new User({ username, password, key, saldo, total, ft });
 
