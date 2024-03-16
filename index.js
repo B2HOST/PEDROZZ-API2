@@ -620,6 +620,10 @@ app.get('/lista_de_logins', (req, res) => {
       });
   });
 
+app.get('/valores', (req, res) => {
+  const htmlPath = path.join(__dirname, './views/valores.html');
+  res.sendFile(htmlPath);
+});
 
   app.get("/search", (req, res) => {
   const name = req.query.q;
