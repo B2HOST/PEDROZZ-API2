@@ -1,240 +1,185 @@
-                  <!DOCTYPE html>
-                  <html lang="en">
-                  <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Lista de Logins</title>
-                  </head>
-                  <style>
-                      * {
-                          margin: 0;
-                      }
-                      body {
-                          font-family: Arial, sans-serif;
-                          text-align: center;
-                          background-color: #444;
-                      }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usuarios</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* Cor de fundo */
+  }
 
-                      .dark-theme {
-                          background-color: #333;
-                          /* Cor de fundo escuro */
-                          color: #fff;
-                          /* Cor do texto escuro */
-                      }
+  section {
+    padding: 40px;
+    text-align: center;
+  
+    border-radius: 10px;
+    color: black; /* Cor do texto */
+  }
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Colocar o vídeo atrás do conteúdo */
+    overflow: hidden;
+  }
 
-                      .dark-theme .video-container {
-                          background-color: #222;
-                          /* Cor de fundo do contêiner de vídeo escuro */
-                      }
+  .video-background video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-                      .dark-theme .header {
-                          background-color: #444;
-                          /* Cor de fundo do cabeçalho escuro */
-                      }
+  .content {
+    position: relative;
+    z-index: 1; /* Colocar o conteúdo na frente do vídeo */
 
-                      h1 {
-                          color: white;
-                      }
+  }
+  .card {
+    width: 350px;
+    height: 350px;
+    
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-                      .menu-container {
-                          position: fixed;
-                          top: 0;
-                          left: -100%;
-                          /* Start off hidden */
-                          height: 100%;
-                          width: 180px;
-                          background-color: #333;
-                          color: #fff;
-                          padding: 20px;
-                          transition: left 0.3s ease-in-out;
-                      }
+  .title, .more {
+    padding: 10px 15px;
+  }
 
-                      .menu-container.show-menu {
-                          left: 0;
-                          /* Show the menu when class 'show-menu' is added */
-                      }
+  .user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+  }
 
-                      .menu-container button {
-                          display: block;
-                          width: 100%;
-                          margin-bottom: 10px;
-                          padding: 10px;
-                          font-size: 16px;
-                          background-color: #007bff;
-                          color: #fff;
-                          border: none;
-                          border-radius: 4px;
-                          cursor: pointer;
-                      }
+  .user__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+  }
 
-                      .menu-container button:hover {
-                          background-color: #0056b3;
-                      }
+  .user__container {
+    display: flex;
+    flex-direction: column;
+  }
 
-                      .menu-toggle {
-                          position: fixed;
-                          top: 10px;
-                          left: 10px;
-                          font-size: 24px;
-                          cursor: pointer;
-                          display: block;
-                          color: white;
-                      }
+  .title {
+    font-weight: 900;
+    font-size: 1.3em;
+    color: black;
+  }
 
-                      .menu-toggle.hide-menu {
-                          display: none;
-                          /* Hide the menu toggle when class 'hide-menu' is added */
-                      }
+  .name {
+    font-weight: 800;
+    color: black;
+  }
 
-                      .close-button {
-                          position: absolute;
-                          top: 10px;
-                          left: 10px;
-                          font-size: 24px;
-                          cursor: pointer;
-                      }
+  .username {
+    font-size: .9em;
+    color: black;
+  }
 
-                      .video-container {
-                          margin-left: 200px;
-                          /* to create space for the menu */
-                          max-width: 99%;
-                          margin: 20px auto;
-                          margin: 15px;
-                          background-color: #333;
-                          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-                          padding: 20px;
-                          border-radius: 8px;
-                          color: white;
-                          box-shadow: 1px 1px 1px black;
-                      }
+  .image {
+    width: 60px;
+    height: 60px;
+    background: rgb(22,19,70);
+    background: linear-gradient(295deg, rgba(22,19,70,1) 41%, rgba(89,177,237,1) 100%);
+    border-radius: 50%;
+    margin-right: 15px;
+  }
 
-                      input[type="text"] {
-                          width: 90%;
-                          padding: 10px;
-                          margin: 10px 0;
-                          font-size: 16px;
-                          border: 1px solid #ccc;
-                          border-radius: 4px;
-                          background-color: white;
-                          color: black;
-                      }
+  .follow {
+    border: none;
+    border-radius: 25px;
+    background-color: #0f1113;
+    color: white;
+    padding: 8px 15px;
+    font-weight: 700;
+  }
 
-                      input[type="password"] {
-                          width: 90%;
-                          padding: 10px;
-                          margin: 10px 0;
-                          font-size: 16px;
-                          border: 1px solid #ccc;
-                          border-radius: 4px;
-                          background-color: white;
-                          color: black;
-                      }
+  .more {
+    display: block;
+    text-decoration: none;
+    color: rgb(29, 155, 240);
+    font-weight: 800;
+  }
 
-                      input[type="submit"] {
-                          display: block;
-                          margin-top: 10px;
-                          padding: 10px;
-                          font-size: 16px;
-                          background-color: #007bff;
-                          color: #fff;
-                          border: none;
-                          border-radius: 4px;
-                          cursor: pointer;
-                      }
+  .user:hover {
+    background-color: #b3b6b6;
+  }
 
-                      .video-player-container {
-                          margin-top: 10px;
-                          width: 100%;
-                          display: flex;
-                          justify-content: center;
-                      }
+  .more:hover {
+    background-color: #b3b6b6;
+    border-radius: 0px 0px 15px 15px;
+  }
 
-                      button {
-                          display: block;
-                          margin-top: 10px;
-                          padding: 10px 60px;
-                          font-size: 16px;
-                          background-color: #007bff;
-                          color: #fff;
-                          border: none;
-                          border-radius: 4px;
-                          cursor: pointer;
-                      }
+  .follow:hover {
+    background-color: #2c3136;
+  }
+  .user-photo1 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .user-name1 {
+    font-size: 16px;
+    color: white;
+  }
+</style>
+</head>
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source src="https://telegra.ph/file/61b159ff9a13addc57a21.mp4" type="video/mp4">
+    </video>
+  </div>
 
-                      a {
-                          text-decoration: none;
-                      }
-
-                    .user-photo1 {
-                      width: 50px;
-                      height: 50px;
-                      border-radius: 50%;
-                      margin-right: 10px;
-                    }
-                    .user-name1 {
-                      font-size: 16px;
-                      color: white;
-                    }
-                  </style>
-                  </head>
-
-                  <body>
-                  <div class="menu-container" id="menu">
-                      <span class="close-button" onclick="toggleMenu()">&#10006;</span>
-                      <h3>Menu</h3><br><hr><br>
-                      <button onclick="toggleDarkTheme()">Tema Escuro</button>
-                      <button onclick="changeBackgroundColor()">Mudar Cor</button>
-                  </div>
-                  <div class="header">
-                      <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-                  </div>
-                  <br>
-                  <h1>Lista de Logins</h1>
-                        <div class="video-container">
-                          <hr><br>
-                          
-                          <% if (users && users.length) { %>
-                             <% users.forEach(function(user) { %>
-                     <img class="user-photo1" src="<%= user.ft %>" alt="Foto do Usuário">
-                              <span>Nome de usuário: <%= user.username %></span><br>
-                              <span>Senha: <%= user.password %></span><br>
-                              <span>Chave: <%= user.key %></span><br>
-                              <span>Saldo: <%= user.saldo %></span>
-                              <!-- Adicione aqui quaisquer outros detalhes do usuário que desejar exibir -->
-                              <br>
-                              <center>
-                                <a href="/editar/<%= user.username %>?key=pedrozz"><button>Editar</button></a>
-                              </center><br><hr><br>
-                            <% }); %>
-                          <% } else { %>
-                            <p>Nenhum usuário encontrado.</p>
-                          <% } %>
+<body>
+  <div class="video-container">
+  <section>
+    <div class="video-container">
+            <p class="title">LISTA DE USUARIOS</p>
+            <% if (users && users.length) { %>
+              <% users.forEach(function(user) { %>
+                    <div class="card">
+                    <div class="user__container">
+                    <div class="user">
+                      <div class="image user-photo1" style="background-image: url('<%= user.ft %>'); background-size: cover; background-position: center;"></div>
+                      <div class="user__content">
+                        <div class="text">
+                          <p class="name"><%= user.username %></p>
+                          <p class="username">SENHA: <%= user.password %></p>
+                          <p class="username">CHAVE: <%= user.key %></p>
+                          <p class="username">SALDO: <%= user.saldo %></p>
+                         
                         </div>
-
-                  <script>
-                      function toggleDarkTheme() {
-                          const body = document.querySelector('body');
-                          const card = document.querySelector('.video-container ');
-                          const cabeca = document.querySelector('.header');
-                          body.classList.toggle('dark-theme');
-                          cabeca.classList.toggle('dark-theme');
-                          card.classList.toggle('dark-theme');
-
-                      }
-
-                      function changeBackgroundColor() {
-                          const newColor = prompt('Digite uma cor em formato hexadecimal (#RRGGBB) ou um nome de cor:');
-                          const body = document.querySelector('body');
-                          body.style.backgroundColor = newColor;
-                      }
-
-                      function toggleMenu() {
-                          const menu = document.getElementById('menu');
-                          const menuToggle = document.querySelector('.menu-toggle');
-
-                          menu.classList.toggle('show-menu');
-                          menuToggle.classList.toggle('hide-menu');
-                      }
-                  </script>
-                  </body>
-                  </html>
+                        <a class="follow" href="/editar/<%= user.username %>?key=pedrozz">Editar</a>
+                      </div>
+                    </div>
+                  </div>
+                      
+                <% }); %>
+              <% } %>
+       
+  </section>
+                </div>
+</body>
+</html>
